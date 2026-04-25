@@ -4,7 +4,7 @@ services:
       dockerfile: apps/api/Dockerfile
       target: dev
     environment:
-      API_PORT: 3000
+      API_PORT: 5000
       WEB_URL: ${WEB_URL}
       CASDOOR_INTERNAL_URL: ${CASDOOR_INTERNAL_URL}
       CASDOOR_EXTERNAL_URL: ${CASDOOR_EXTERNAL_URL}
@@ -13,9 +13,18 @@ services:
       CASDOOR_REDIRECT_URI: ${CASDOOR_REDIRECT_URI}
       CASDOOR_APP_NAME: ${CASDOOR_APP_NAME}
     ports:
-      - "3000:3000"
+      - "5000:5000"
     volumes:
       - ./apps/api/src:/app/apps/api/src
+
+  web:
+    build:
+      dockerfile: apps/web/Dockerfile
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web/app:/app/apps/web/app
 
   casdoor-db:
     image: postgres:17
