@@ -35,6 +35,7 @@ export class AppController {
 
       res.cookie('access_token', tokenResponse.access_token, {
         httpOnly: true,
+        secure: true,
         sameSite: 'lax',
       });
 

@@ -58,5 +58,17 @@ services:
       casdoor-db:
         condition: service_healthy
 
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infrastructure/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./infrastructure/certs:/etc/nginx/certs:ro
+    depends_on:
+      - casdoor
+
 volumes:
   casdoor-db-data:
